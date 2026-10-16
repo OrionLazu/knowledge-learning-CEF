@@ -36,8 +36,8 @@ Les clients achètent un **cursus complet** ou une **leçon**, suivent les leço
 ## Installation
 
 ```bash
-git clone https://github.com/OrionLazu/knowledge-learning.git
-cd knowledge-learning
+git clone https://github.com/OrionLazu/knowledge-learning-CEF.git
+cd knowledge-learning-CEF
 composer install
 ```
 
