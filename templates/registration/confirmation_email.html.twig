@@ -1,0 +1,14 @@
+<h1 style="font-family: 'Comic Sans MS', sans-serif; color: #00497c;">Bienvenue sur Knowledge Learning, {{ user.firstName }} !</h1>
+
+<p style="font-family: 'Comic Sans MS', sans-serif;">
+    Pour activer votre compte et pouvoir acheter nos formations, cliquez sur le lien ci-dessous :
+</p>
+
+<p>
+    <a href="{{ signedUrl|raw }}" style="display: inline-block; padding: 10px 16px; background: #0074c7; color: #fff; text-decoration: none; border-radius: 4px;">Activer mon compte</a>
+</p>
+
+<p style="font-family: 'Comic Sans MS', sans-serif; font-size: 13px;">
+    Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.<br>
+    Si vous n'êtes pas à l'origine de cette inscription, ignorez simplement cet e-mail.
+</p>
