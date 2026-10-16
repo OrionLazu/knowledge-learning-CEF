@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos formations{% endblock %}
+
+{% block body %}
+    <h1 class="mb-3">Nos formations en ligne</h1>
+    <p class="lead">Étudiez de chez vous et en toute autonomie. Achetez un cursus complet ou seulement la leçon qui vous intéresse, validez vos leçons et obtenez la certification Knowledge Learning de chaque thème.</p>
+
+    {% for theme in themes %}
+        <section class="mb-4">
+            <h2>{{ theme.name }}</h2>
+            {% if theme.description %}<p>{{ theme.description }}</p>{% endif %}
+            <div class="row g-3">
+                {% for course in theme.courses %}
+                    <div class="col-md-6 col-lg-4">
+                        <article class="card h-100">
+                            <div class="card-body">
+                                <h3 class="h5 card-title">
+                                    <a href="{{ path('app_course_show', {id: course.id}) }}">{{ course.title }}</a>
+                                </h3>
+                                {% if course.id in validatedCourseIds %}
+                                    <span class="badge badge-validated">Cursus validé</span>
+                                {% endif %}
+                                <p class="card-text small mb-1">{{ course.lessons|length }} leçons</p>
+                                <p class="price mb-0">{{ course.price|price }}</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="{{ path('app_course_show', {id: course.id}) }}" class="btn btn-outline-primary btn-sm">Voir le cursus</a>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <p>Aucune formation n'est disponible pour le moment.</p>
+    {% endfor %}
+{% endblock %}

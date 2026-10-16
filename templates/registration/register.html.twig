@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <h1 class="mb-3">Créer un compte</h1>
+            <p>Après l'inscription, vous recevrez un e-mail pour activer votre compte. Un compte activé est nécessaire pour acheter un cursus ou une leçon.</p>
+
+            <div class="bg-white p-4 rounded">
+                {{ form_start(registrationForm) }}
+                    <div class="row">
+                        <div class="col-sm-6">{{ form_row(registrationForm.firstName) }}</div>
+                        <div class="col-sm-6">{{ form_row(registrationForm.lastName) }}</div>
+                    </div>
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword.first) }}
+                    {{ form_row(registrationForm.plainPassword.second) }}
+                    <button type="submit" class="btn btn-primary w-100">Créer mon compte</button>
+                {{ form_end(registrationForm) }}
+            </div>
+
+            <p class="mt-3">Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous</a>.</p>
+        </div>
+    </div>
+{% endblock %}

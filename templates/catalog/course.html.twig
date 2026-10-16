@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block body %}
+    <nav aria-label="Fil d'Ariane">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Formations</a></li>
+            <li class="breadcrumb-item">{{ course.theme.name }}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ course.title }}</li>
+        </ol>
+    </nav>
+
+    <h1>{{ course.title }}</h1>
+    {% if course.description %}<p>{{ course.description }}</p>{% endif %}
+
+    {% set ownedCount = course.lessons|filter(l => l.id in ownedLessonIds)|length %}
+    {% if course.id in validatedCourseIds %}
+        <p><span class="badge badge-validated fs-6">Cursus validé</span></p>
+    {% endif %}
+
+    <div class="mb-4">
+        {% if ownedCount < course.lessons|length %}
+            {{ include('catalog/_buy_button.html.twig', {route: 'app_purchase_course', item: course, token_id: 'buy_course_' ~ course.id, label: 'Acheter le cursus complet'}) }}
+        {% else %}
+            <span class="badge badge-owned">Vous avez accès à tout le cursus</span>
+        {% endif %}
+    </div>
+
+    <h2 class="h4">Leçons du cursus</h2>
+    <ul class="list-group">
+        {% for lesson in course.lessons %}
+            <li class="list-group-item d-flex flex-wrap align-items-center gap-2">
+                <span class="me-auto">Leçon n°{{ lesson.position }} : {{ lesson.title }}</span>
+                {% if lesson.id in validatedLessonIds %}
+                    <span class="badge badge-validated">Validée</span>
+                {% endif %}
+                {% if is_granted('LESSON_VIEW', lesson) %}
+                    <a href="{{ path('app_lesson_show', {id: lesson.id}) }}" class="btn btn-outline-primary btn-sm">Ouvrir la leçon</a>
+                {% else %}
+                    {{ include('catalog/_buy_button.html.twig', {route: 'app_purchase_lesson', item: lesson, token_id: 'buy_lesson_' ~ lesson.id, label: 'Acheter la leçon'}) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
