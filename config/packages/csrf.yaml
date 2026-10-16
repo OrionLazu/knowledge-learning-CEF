@@ -1,0 +1,10 @@
+# CSRF protection.
+# Every form (registration, login, purchase, lesson validation, back office) carries a token
+# stored in the user's session. A POST request without a valid token is rejected, so a third-party
+# website cannot submit forms on behalf of a logged-in user.
+framework:
+    form:
+        csrf_protection:
+            enabled: true
+    csrf_protection:
+        enabled: true

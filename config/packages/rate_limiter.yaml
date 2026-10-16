@@ -1,0 +1,7 @@
+# Limits the number of activation e-mails a user can ask for: 3 every 15 minutes.
+framework:
+    rate_limiter:
+        activation_email:
+            policy: fixed_window
+            limit: 3
+            interval: '15 minutes'

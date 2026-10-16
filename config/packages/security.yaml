@@ -1,0 +1,57 @@
+security:
+    # Passwords are hashed with the best available algorithm (bcrypt or argon2id): never stored in clear text.
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # Role hierarchy: an administrator also has the rights of a client.
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_CLIENT]
+
+    providers:
+        # Users are loaded from MySQL and log in with their e-mail address.
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            # Ensure dev tools and static assets are always allowed
+            pattern: ^/(_profiler|_wdt|assets|build|images|css|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: email
+                password_parameter: password
+                # The login form carries a CSRF token.
+                enable_csrf: true
+                default_target_path: app_home
+            # Slows down brute-force attacks: 5 attempts per minute.
+            login_throttling:
+                max_attempts: 5
+                interval: '1 minute'
+            logout:
+                path: app_logout
+                target: app_home
+                # Logging out requires a token: a third-party website cannot log the user out.
+                enable_csrf: true
+
+    # Only the first matching rule is applied.
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/(lesson|purchase|certifications|account), roles: ROLE_USER }
+
+when@test:
+    security:
+        password_hashers:
+            # Password hashers are resource-intensive by design to ensure security.
+            # In tests, it's safe to reduce their cost to improve performance.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon
