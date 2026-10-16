@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes certifications{% endblock %}
+
+{% block body %}
+    <h1>Mes certifications</h1>
+    <p>Une certification Knowledge Learning est délivrée dès que vous avez validé toutes les leçons d'un thème.</p>
+
+    <div class="row g-3">
+        {% for certification in certifications %}
+            <div class="col-md-6">
+                <div class="certificate p-4 text-center h-100">
+                    <p class="text-uppercase small mb-1">Certification Knowledge Learning</p>
+                    <h2 class="h3">{{ certification.theme.name }}</h2>
+                    <p class="mb-0">Délivrée à {{ app.user.fullName }} le {{ certification.obtainedAt|date('d/m/Y') }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="alert alert-info">Vous n'avez pas encore de certification. Validez toutes les leçons d'un thème pour obtenir la première !</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

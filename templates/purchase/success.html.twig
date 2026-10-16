@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement confirmé{% endblock %}
+
+{% block body %}
+    <h1>Merci pour votre achat !</h1>
+    <p>Le paiement de la commande n°{{ purchase.id }} ({{ purchase.total|price }}) a été confirmé par Stripe.</p>
+
+    <h2 class="h4">Vous avez maintenant accès à :</h2>
+    <ul>
+        {% for item in purchase.items %}
+            <li>{{ item.label }}</li>
+        {% endfor %}
+    </ul>
+
+    {% set firstItem = purchase.items|first %}
+    {% if firstItem and firstItem.lesson %}
+        <a href="{{ path('app_lesson_show', {id: firstItem.lesson.id}) }}" class="btn btn-primary">Commencer la leçon</a>
+    {% elseif firstItem and firstItem.course %}
+        <a href="{{ path('app_course_show', {id: firstItem.course.id}) }}" class="btn btn-primary">Commencer le cursus</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes achats{% endblock %}
+
+{% block body %}
+    <h1>Mes achats</h1>
+
+    {% if purchases is empty %}
+        <p class="alert alert-info">Vous n'avez encore rien acheté. <a href="{{ path('app_home') }}">Découvrez nos formations</a>.</p>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table bg-white">
+                <thead>
+                    <tr><th scope="col">Commande</th><th scope="col">Date</th><th scope="col">Contenu</th><th scope="col">Total</th></tr>
+                </thead>
+                <tbody>
+                    {% for purchase in purchases %}
+                        <tr>
+                            <td>n°{{ purchase.id }}</td>
+                            <td>{{ purchase.paidAt|date('d/m/Y H:i') }}</td>
+                            <td>{% for item in purchase.items %}{{ item.label }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+                            <td>{{ purchase.total|price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
