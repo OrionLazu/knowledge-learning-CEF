@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Configuration of phpDocumentor: generates the code documentation in docs/api (composer docs). -->
+<phpdocumentor configVersion="3"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns="https://www.phpdoc.org"
+               xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd">
+    <title>Knowledge Learning - documentation du code</title>
+    <paths>
+        <output>docs/api</output>
+        <cache>var/cache/phpdoc</cache>
+    </paths>
+    <version number="1.0.0">
+        <api>
+            <source dsn=".">
+                <path>src</path>
+                <path>tests</path>
+            </source>
+            <visibility>public</visibility>
+            <visibility>protected</visibility>
+            <visibility>private</visibility>
+            <default-package-name>KnowledgeLearning</default-package-name>
+        </api>
+    </version>
+</phpdocumentor>
