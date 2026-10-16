@@ -1,0 +1,12 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block main %}
+    <p>Bienvenue dans l'administration de Knowledge Learning : gérez les comptes, les contenus et consultez les achats à partir du menu.</p>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="card p-3"><p class="mb-1">Utilisateurs</p><p class="h3 mb-0">{{ userCount }}</p></div></div>
+        <div class="col-md-4"><div class="card p-3"><p class="mb-1">Commandes payées</p><p class="h3 mb-0">{{ paidPurchaseCount }}</p></div></div>
+        <div class="col-md-4"><div class="card p-3"><p class="mb-1">Certifications délivrées</p><p class="h3 mb-0">{{ certificationCount }}</p></div></div>
+    </div>
+{% endblock %}
