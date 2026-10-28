@@ -1,5 +1,6 @@
 framework:
-    default_locale: en
+    # The whole interface (including the EasyAdmin back office) is in French.
+    default_locale: fr
     translator:
         default_path: '%kernel.project_dir%/translations'
         providers:

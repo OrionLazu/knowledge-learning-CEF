@@ -57,7 +57,10 @@ class PurchaseCrudController extends AbstractCrudController
     {
         yield IdField::new('id', 'N°');
         yield AssociationField::new('customer', 'Client');
-        yield ChoiceField::new('status', 'Statut')->setChoices($this->statusChoices());
+        yield ChoiceField::new('status', 'Statut')
+            ->setChoices($this->statusChoices())
+            // Displays the French label of the status instead of the enum case name.
+            ->formatValue(static fn (?PurchaseStatus $status): string => $status?->label() ?? '');
         yield MoneyField::new('total', 'Total')->setCurrency('EUR')->setStoredAsCents();
         yield DateTimeField::new('paidAt', 'Payée le');
         yield CollectionField::new('items', 'Contenu')->onlyOnDetail();
