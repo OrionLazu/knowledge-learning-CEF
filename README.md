@@ -4,6 +4,7 @@ Plateforme e-learning et e-commerce de la société **Knowledge**, réalisée av
 
 Les clients achètent un **cursus complet** ou une **leçon**, suivent les leçons (fiche + vidéo), les valident et obtiennent la **certification Knowledge Learning** d'un thème quand toutes ses leçons sont validées.
 
+- 🌐 **Application en ligne :** https://knowledge-learning.alwaysdata.net (achats tests Stripe, voir [Version en ligne](#version-en-ligne))
 - 🗄️ **Modèle physique de données :** [docs/mpd-knowledge-learning.png](docs/mpd-knowledge-learning.png)
 - 📚 **Documentation du code (phpDocumentor) :** [docs/api/index.html](docs/api/index.html)
 
@@ -24,6 +25,14 @@ Les clients achètent un **cursus complet** ou une **leçon**, suivent les leço
 - Acheter une leçon ou un cursus donne le **droit d'accès** aux pages des leçons concernées (table `lesson_access`).
 - Valider toutes les leçons d'un cursus **valide le cursus** automatiquement ; valider toutes les leçons d'un thème délivre la **certification**.
 - Paiement par **Stripe Checkout en mode test** (bac à sable) : aucune carte réelle ne peut être débitée.
+
+## Version en ligne
+
+L'application est hébergée sur **alwaysdata** (PHP 8.4, MariaDB 11.8) : **https://knowledge-learning.alwaysdata.net**
+
+- Les e-mails d'activation sont réellement envoyés (pensez à regarder dans les **courriers indésirables**).
+- Les paiements passent par Stripe en **environnement de test** : carte `4242 4242 4242 4242`, date future, CVC quelconque. Aucune carte réelle n'est débitée.
+- Les comptes de démonstration ci-dessous existent aussi en ligne.
 
 ## Prérequis
 
