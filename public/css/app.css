@@ -1,0 +1,80 @@
+/*
+ * Knowledge Learning - minimal style sheet.
+ * Colours of the graphic charter: the last two (red and green) are only used as accents.
+ */
+:root {
+    --kl-light: #f1f8fc;
+    --kl-blue: #0074c7;
+    --kl-dark-blue: #00497c;
+    --kl-grey: #384050;
+    --kl-red: #cd2c2e;
+    --kl-green: #82b864;
+}
+
+body {
+    font-family: "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive, sans-serif;
+    background-color: var(--kl-light);
+    color: var(--kl-grey);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    color: var(--kl-blue);
+}
+
+.navbar {
+    background-color: #fff;
+    border-bottom: 3px solid var(--kl-dark-blue);
+}
+
+.navbar-brand img {
+    height: 60px;
+    width: auto;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--kl-blue);
+    --bs-btn-border-color: var(--kl-blue);
+    --bs-btn-hover-bg: var(--kl-dark-blue);
+    --bs-btn-hover-border-color: var(--kl-dark-blue);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--kl-blue);
+    --bs-btn-border-color: var(--kl-blue);
+    --bs-btn-hover-bg: var(--kl-blue);
+    --bs-btn-hover-border-color: var(--kl-blue);
+}
+
+h1, h2, h3 {
+    color: var(--kl-dark-blue);
+}
+
+.badge-validated {
+    background-color: var(--kl-green);
+}
+
+.badge-owned {
+    background-color: var(--kl-blue);
+}
+
+.price {
+    font-weight: bold;
+    color: var(--kl-dark-blue);
+}
+
+.certificate {
+    border: 3px double var(--kl-dark-blue);
+    background-color: #fff;
+}
+
+.site-footer {
+    background-color: var(--kl-grey);
+    color: #fff;
+}

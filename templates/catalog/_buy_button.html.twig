@@ -1,0 +1,14 @@
+{#
+    "Buy" button of a course or a lesson.
+    Variables: route (purchase route), item (course or lesson), token_id (CSRF token id), label.
+#}
+{% if app.user %}
+    <form method="post" action="{{ path(route, {id: item.id}) }}" class="d-inline">
+        <input type="hidden" name="_token" value="{{ csrf_token(token_id) }}">
+        <button type="submit" class="btn btn-primary btn-sm" {{ app.user.verified ? '' : 'disabled title="Activez votre compte pour acheter"' }}>
+            {{ label }} - {{ item.price|price }}
+        </button>
+    </form>
+{% else %}
+    <a href="{{ path('app_login') }}" class="btn btn-outline-primary btn-sm">Se connecter pour acheter - {{ item.price|price }}</a>
+{% endif %}

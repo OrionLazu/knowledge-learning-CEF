@@ -1,0 +1,18 @@
+{# Error page displayed in production (403, 404, 500...). #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur {{ status_code }}{% endblock %}
+
+{% block body %}
+    <h1>
+        {% if status_code == 403 %}Accès refusé
+        {% elseif status_code == 404 %}Page introuvable
+        {% else %}Une erreur est survenue{% endif %}
+    </h1>
+    <p>
+        {% if status_code == 403 %}Vous n'avez pas les droits nécessaires pour afficher cette page.
+        {% elseif status_code == 404 %}La page demandée n'existe pas ou a été déplacée.
+        {% else %}Veuillez réessayer dans quelques instants.{% endif %}
+    </p>
+    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour aux formations</a>
+{% endblock %}

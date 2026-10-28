@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lesson.title }}{% endblock %}
+
+{% block body %}
+    <nav aria-label="Fil d'Ariane">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Formations</a></li>
+            <li class="breadcrumb-item">{{ lesson.course.theme.name }}</li>
+            <li class="breadcrumb-item"><a href="{{ path('app_course_show', {id: lesson.course.id}) }}">{{ lesson.course.title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Leçon n°{{ lesson.position }}</li>
+        </ol>
+    </nav>
+
+    <article>
+        <h1>Leçon n°{{ lesson.position }} : {{ lesson.title }}</h1>
+
+        {% if lesson.videoUrl %}
+            <div class="ratio ratio-16x9 my-3" style="max-width: 720px;">
+                <video controls preload="metadata" src="{{ lesson.videoUrl }}">
+                    Votre navigateur ne peut pas lire cette vidéo.
+                </video>
+            </div>
+        {% endif %}
+
+        <div class="bg-white p-3 rounded mb-4">
+            {{ lesson.content|nl2br }}
+        </div>
+    </article>
+
+    {% if isValidated %}
+        <p><span class="badge badge-validated fs-6">Leçon validée</span></p>
+    {% elseif not is_granted('ROLE_ADMIN') %}
+        <form method="post" action="{{ path('app_lesson_validate', {id: lesson.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('validate_lesson_' ~ lesson.id) }}">
+            <button type="submit" class="btn btn-primary">Valider la leçon</button>
+        </form>
+    {% endif %}
+
+    <p class="mt-4"><a href="{{ path('app_course_show', {id: lesson.course.id}) }}">&larr; Retour au cursus</a></p>
+{% endblock %}
